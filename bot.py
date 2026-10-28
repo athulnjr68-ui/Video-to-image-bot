@@ -3,7 +3,7 @@ import telebot
 from flask import Flask, request
 
 TOKEN = "9274510322:AAGrIXaBoz4Gb0eGOmkPcT5COEwhh2Mekis"
-APP_URL = "https://video-to-image-bot-xxxx.onrender.com"  # Ningalude Render URL iviade nalkuka
+APP_URL = "https://video-to-image-bot-xxxx.onrender.com"  # നിങ്ങളുടെ റെണ്ടർ ലിങ്ക്
 CHANNEL_ID = "@jshshajanansh"
 
 bot = telebot.TeleBot(TOKEN)
@@ -18,7 +18,7 @@ def get_message():
 
 @server.route('/')
 def index():
-    return "Video Bot is running!", 200
+    return "Video Forwarder Bot is running!", 200
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -29,7 +29,7 @@ def handle_video(message):
     try:
         bot.reply_to(message, "⚙️ Forwarding video to the channel... Please wait!")
         
-        # User ayakunna video straight aayi channel-ilekk forward cheyyunnu (caption illathe)
+        # യൂസർ അയക്കുന്ന വീഡിയോ ചാനലിലേക്ക് ക്യാപ്ഷൻ ഇല്ലാതെ ഫോർവേഡ് ചെയ്യുന്നു
         bot.send_video(CHANNEL_ID, message.video.file_id)
         
         bot.reply_to(message, "✅ Done! Video successfully forwarded to the channel.")
