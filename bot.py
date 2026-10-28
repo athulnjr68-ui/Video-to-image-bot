@@ -3,8 +3,8 @@ import cv2
 import telebot
 from flask import Flask, request
 
-# Token and Render setup
-TOKEN = os.getenv('TOKEN', '9274510322:AAG2Du1hH8I_UiTGVzVdr22UfMEDshpq6WI')
+# Updated bot token and Render webhook setup
+TOKEN = os.getenv('TOKEN', '9274510322:AAHPTEUmBa-GbpT0Dq30IC8QT8IYULPFexY')
 APP_URL = os.getenv('RENDER_EXTERNAL_URL', 'https://video-to-image-bot-xxxx.onrender.com')  # Replace with your actual Render URL
 CHANNEL_ID = "@jshshajanansh"
 
