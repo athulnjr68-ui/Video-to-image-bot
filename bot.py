@@ -4,7 +4,7 @@ import telebot
 from flask import Flask, request
 
 TOKEN = "9274510322:AAGrIXaBoz4Gb0eGOmkPcT5COEwhh2Mekis"
-APP_URL = "https://video-to-image-bot.onrender.com"  # Render-ൽ ഈ ബോട്ടിനായി പുതിയ Web Service ഉണ്ടാക്കുമ്പോൾ കിട്ടുന്ന URL ഇവിടെ നൽകുക
+APP_URL = "https://video-to-image-bot-xxxx.onrender.com"  # ഇവിടെ നിങ്ങളുടെ റെണ്ടർ ലിങ്ക് നൽകുക (xxxx എന്നുള്ള ഭാഗത്ത് നിങ്ങളുടെ ആപ്പ് ലിങ്കിലെ അക്ഷരങ്ങൾ വരും)
 CHANNEL_ID = "@jshshajanansh"
 
 bot = telebot.TeleBot(TOKEN)
